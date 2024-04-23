@@ -1,0 +1,15 @@
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\bin\Debug\net6.0\pt-cs-labs.exe
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\bin\Debug\net6.0\pt-cs-labs.deps.json
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\bin\Debug\net6.0\pt-cs-labs.runtimeconfig.json
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\bin\Debug\net6.0\pt-cs-labs.dll
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\bin\Debug\net6.0\pt-cs-labs.pdb
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\pt-cs-labs.csproj.AssemblyReference.cache
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\pt-cs-labs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\pt-cs-labs.AssemblyInfoInputs.cache
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\pt-cs-labs.AssemblyInfo.cs
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\pt-cs-labs.csproj.CoreCompileInputs.cache
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\pt-cs-labs.dll
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\refint\pt-cs-labs.dll
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\pt-cs-labs.pdb
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\pt-cs-labs.genruntimeconfig.cache
+C:\Users\sindbad_the_sailor\VSCProjects\pt-cs-labs\obj\Debug\net6.0\ref\pt-cs-labs.dll
