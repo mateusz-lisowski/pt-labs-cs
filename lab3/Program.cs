@@ -111,7 +111,7 @@ namespace LINQQueries
             XElement rootNode = XElement.Load("CarsCollection.xml");
 
             // Wyrażenie XPath #1
-            double avgHP = (double)rootNode.XPathEvaluate("sum(//car[engine/model != 'TDI']/engine/horsePower) div count(//car[engine/model != 'TDI'])");
+            double avgHP = (double)rootNode.XPathEvaluate("sum(//car[engine/@model != 'TDI']/engine/horsePower) div count(//car[engine/@model != 'TDI'])");
 
             // Wyrażenie XPath #2
             var models = rootNode.XPathSelectElements("//car/model").Select(m => m.Value).Distinct();
@@ -134,7 +134,7 @@ namespace LINQQueries
             }
 
             // Zmiana elementu year na atrybut model
-            foreach (var carElement in xmlDocument.Descendants("Car"))
+            foreach (var carElement in xmlDocument.Descendants("car"))
             {
                 var modelElement = carElement.Element("model");
                 var yearElement = carElement.Element("year");
@@ -145,7 +145,6 @@ namespace LINQQueries
                     yearElement.Remove();
                 }
             }
-
 
             xmlDocument.Save("ModifiedCarsCollection.xml");
             Console.WriteLine("Dokument XML został zmodyfikowany zgodnie z wymaganiami.");
@@ -172,7 +171,7 @@ namespace LINQQueries
                 element.Name = "car";
 
                 var engineElement = element.Element("engine");
-                var modelElement = element.Element("model");
+                var modelElement = engineElement.Element("model");
 
                 if (engineElement != null && modelElement != null)
                 {

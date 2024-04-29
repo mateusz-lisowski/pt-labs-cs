@@ -1,75 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <cars>
   <car>
-    <year>2009</year>
-    <engine model="E250">
+    <model year="2009">E250</model>
+    <engine model="CGI">
       <displacement>1.8</displacement>
       <hp>204</hp>
-      <model>CGI</model>
     </engine>
   </car>
   <car>
-    <year>2009</year>
-    <engine model="E350">
+    <model year="2009">E350</model>
+    <engine model="CGI">
       <displacement>3.5</displacement>
       <hp>292</hp>
-      <model>CGI</model>
     </engine>
   </car>
   <car>
-    <year>2012</year>
-    <engine model="A6">
+    <model year="2012">A6</model>
+    <engine model="FSI">
       <displacement>2.5</displacement>
       <hp>187</hp>
-      <model>FSI</model>
     </engine>
   </car>
   <car>
-    <year>2012</year>
-    <engine model="A6">
+    <model year="2012">A6</model>
+    <engine model="FSI">
       <displacement>2.8</displacement>
       <hp>220</hp>
-      <model>FSI</model>
     </engine>
   </car>
   <car>
-    <year>2012</year>
-    <engine model="A6">
+    <model year="2012">A6</model>
+    <engine model="TFSI">
       <displacement>3</displacement>
       <hp>295</hp>
-      <model>TFSI</model>
     </engine>
   </car>
   <car>
-    <year>2011</year>
-    <engine model="A6">
+    <model year="2011">A6</model>
+    <engine model="TDI">
       <displacement>2</displacement>
       <hp>175</hp>
-      <model>TDI</model>
     </engine>
   </car>
   <car>
-    <year>2011</year>
-    <engine model="A6">
+    <model year="2011">A6</model>
+    <engine model="TDI">
       <displacement>3</displacement>
       <hp>309</hp>
-      <model>TDI</model>
     </engine>
   </car>
   <car>
-    <year>2012</year>
-    <engine model="S6">
+    <model year="2012">S6</model>
+    <engine model="TFSI">
       <displacement>4</displacement>
       <hp>414</hp>
-      <model>TFSI</model>
     </engine>
   </car>
   <car>
-    <year>2012</year>
-    <engine model="S8">
+    <model year="2012">S8</model>
+    <engine model="TFSI">
       <displacement>4</displacement>
       <hp>513</hp>
-      <model>TFSI</model>
     </engine>
   </car>
 </cars>
