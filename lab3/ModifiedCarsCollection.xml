@@ -1,84 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Car>
-    <Model>E250</Model>
+    <Model year="2009">E250</Model>
     <CarEngine>
       <Displacement>1.8</Displacement>
-      <HorsePower>204</HorsePower>
+      <hp>204</hp>
       <Model>CGI</Model>
     </CarEngine>
-    <Year>2009</Year>
   </Car>
   <Car>
-    <Model>E350</Model>
+    <Model year="2009">E350</Model>
     <CarEngine>
       <Displacement>3.5</Displacement>
-      <HorsePower>292</HorsePower>
+      <hp>292</hp>
       <Model>CGI</Model>
     </CarEngine>
-    <Year>2009</Year>
   </Car>
   <Car>
-    <Model>A6</Model>
+    <Model year="2012">A6</Model>
     <CarEngine>
       <Displacement>2.5</Displacement>
-      <HorsePower>187</HorsePower>
+      <hp>187</hp>
       <Model>FSI</Model>
     </CarEngine>
-    <Year>2012</Year>
   </Car>
   <Car>
-    <Model>A6</Model>
+    <Model year="2012">A6</Model>
     <CarEngine>
       <Displacement>2.8</Displacement>
-      <HorsePower>220</HorsePower>
+      <hp>220</hp>
       <Model>FSI</Model>
     </CarEngine>
-    <Year>2012</Year>
   </Car>
   <Car>
-    <Model>A6</Model>
+    <Model year="2012">A6</Model>
     <CarEngine>
       <Displacement>3</Displacement>
-      <HorsePower>295</HorsePower>
+      <hp>295</hp>
       <Model>TFSI</Model>
     </CarEngine>
-    <Year>2012</Year>
   </Car>
   <Car>
-    <Model>A6</Model>
+    <Model year="2011">A6</Model>
     <CarEngine>
       <Displacement>2</Displacement>
-      <HorsePower>175</HorsePower>
+      <hp>175</hp>
       <Model>TDI</Model>
     </CarEngine>
-    <Year>2011</Year>
   </Car>
   <Car>
-    <Model>A6</Model>
+    <Model year="2011">A6</Model>
     <CarEngine>
       <Displacement>3</Displacement>
-      <HorsePower>309</HorsePower>
+      <hp>309</hp>
       <Model>TDI</Model>
     </CarEngine>
-    <Year>2011</Year>
   </Car>
   <Car>
-    <Model>S6</Model>
+    <Model year="2012">S6</Model>
     <CarEngine>
       <Displacement>4</Displacement>
-      <HorsePower>414</HorsePower>
+      <hp>414</hp>
       <Model>TFSI</Model>
     </CarEngine>
-    <Year>2012</Year>
   </Car>
   <Car>
-    <Model>S8</Model>
+    <Model year="2012">S8</Model>
     <CarEngine>
       <Displacement>4</Displacement>
-      <HorsePower>513</HorsePower>
+      <hp>513</hp>
       <Model>TFSI</Model>
     </CarEngine>
-    <Year>2012</Year>
   </Car>
 </ArrayOfCar>

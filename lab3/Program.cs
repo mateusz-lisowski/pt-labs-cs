@@ -109,7 +109,7 @@ namespace LINQQueries
             XDocument xmlDocument = XDocument.Load("CarsCollection.xml");
 
             // Zmiana nazwy elementu horsePower na hp
-            foreach (var element in xmlDocument.Descendants("horsePower").ToList())
+            foreach (var element in xmlDocument.Descendants("HorsePower").ToList())
             {
                 element.Name = "hp";
             }
@@ -117,8 +117,8 @@ namespace LINQQueries
             // Zmiana elementu year na atrybut model
             foreach (var carElement in xmlDocument.Descendants("Car"))
             {
-                var modelElement = carElement.Element("model");
-                var yearElement = carElement.Element("year");
+                var modelElement = carElement.Element("Model");
+                var yearElement = carElement.Element("Year");
 
                 if (modelElement != null && yearElement != null)
                 {
