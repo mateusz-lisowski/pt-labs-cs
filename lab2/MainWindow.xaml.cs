@@ -39,14 +39,35 @@ namespace wpf_full
             DisplayFileAttributes(path);
         }
 
-        private void TreeView_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void TreeView_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
-
-            if (treeViewItem != null)
+            TreeViewItem item = (TreeViewItem)TreeView.SelectedItem;
+            if (item != null)
             {
-                treeViewItem.Focus();
-                e.Handled = true;
+                ContextMenu menu = new ContextMenu();
+
+                MenuItem deleteMenuItem = new MenuItem();
+                deleteMenuItem.Header = "Delete";
+                deleteMenuItem.Click += DeleteMenuItem_Click;
+                menu.Items.Add(deleteMenuItem);
+
+                if (Directory.Exists(item.Tag.ToString()))
+                {
+                    MenuItem createMenuItem = new MenuItem();
+                    createMenuItem.Header = "Create";
+                    createMenuItem.Click += CreateMenuItem_Click;
+                    menu.Items.Add(createMenuItem);
+                }
+
+                if (File.Exists(item.Tag.ToString()))
+                {
+                    MenuItem openMenuItem = new MenuItem();
+                    openMenuItem.Header = "Open";
+                    openMenuItem.Click += OpenFileMenuItem_Click;
+                    menu.Items.Add(openMenuItem);
+                }
+
+                item.ContextMenu = menu;
             }
         }
 

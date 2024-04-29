@@ -21,16 +21,13 @@
         </Menu>
 
         <TreeView Grid.Row="1" x:Name="TreeView" SelectedItemChanged="TreeView_SelectedItemChanged" MouseRightButtonDown="TreeView_MouseRightButtonDown">
-            <TreeView.ContextMenu>
+            <!--<TreeView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Delete" Click="DeleteMenuItem_Click"/>
-                    <MenuItem Header="Create">
-                        <MenuItem Header="File" Click="CreateMenuItem_Click"/>
-                        <MenuItem Header="Folder" Click="CreateMenuItem_Click"/>
-                    </MenuItem>
+                    <MenuItem Header="Create" Click="CreateMenuItem_Click"/>
                     <MenuItem Header="Open File" Click="OpenFileMenuItem_Click"/>
                 </ContextMenu>
-            </TreeView.ContextMenu>
+            </TreeView.ContextMenu>-->
         </TreeView>
 
         <StatusBar Grid.Row="2">
