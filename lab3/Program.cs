@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Xml.XPath;
 
 namespace LINQQueries
 {
+    [Serializable]
     public class Car
     {
+        [XmlElement("model")]
         public string Model { get; set; }
-        public Engine CarEngine { get; set; }
+
+        [XmlElement("year")]
         public int Year { get; set; }
 
-        public Car() { }
+        [XmlElement("engine")]
+        public Engine CarEngine { get; set; }
+
+        // Domyślny konstruktor dla Serializera
+        public Car()
+        {
+        }
 
         public Car(string model, Engine engine, int year)
         {
@@ -24,13 +34,22 @@ namespace LINQQueries
         }
     }
 
+    [Serializable]
     public class Engine
     {
+        [XmlElement("displacement")]
         public double Displacement { get; set; }
+
+        [XmlElement("horsePower")]
         public double HorsePower { get; set; }
+
+        [XmlElement("model")]
         public string Model { get; set; }
 
-        public Engine() { }
+        // Domyślny konstruktor dla Serializera
+        public Engine()
+        {
+        }
 
         public Engine(double displacement, double horsePower, string model)
         {
@@ -92,10 +111,10 @@ namespace LINQQueries
             XElement rootNode = XElement.Load("CarsCollection.xml");
 
             // Wyrażenie XPath #1
-            double avgHP = (double)rootNode.XPathEvaluate("sum(//Car[CarEngine/Model != 'TDI']/CarEngine/HorsePower) div count(//Car[CarEngine/Model != 'TDI'])");
+            double avgHP = (double)rootNode.XPathEvaluate("sum(//car[engine/model != 'TDI']/engine/horsePower) div count(//car[engine/model != 'TDI'])");
 
             // Wyrażenie XPath #2
-            var models = rootNode.XPathSelectElements("//Car/Model").Select(m => m.Value).Distinct();
+            var models = rootNode.XPathSelectElements("//car/model").Select(m => m.Value).Distinct();
 
             Console.WriteLine($"Średnia moc samochodów o silnikach innych niż TDI: {avgHP}");
             Console.WriteLine("Modele samochodów bez powtórzeń:");
@@ -109,7 +128,7 @@ namespace LINQQueries
             XDocument xmlDocument = XDocument.Load("CarsCollection.xml");
 
             // Zmiana nazwy elementu horsePower na hp
-            foreach (var element in xmlDocument.Descendants("HorsePower").ToList())
+            foreach (var element in xmlDocument.Descendants("horsePower").ToList())
             {
                 element.Name = "hp";
             }
@@ -117,8 +136,8 @@ namespace LINQQueries
             // Zmiana elementu year na atrybut model
             foreach (var carElement in xmlDocument.Descendants("Car"))
             {
-                var modelElement = carElement.Element("Model");
-                var yearElement = carElement.Element("Year");
+                var modelElement = carElement.Element("model");
+                var yearElement = carElement.Element("year");
 
                 if (modelElement != null && yearElement != null)
                 {
@@ -134,17 +153,44 @@ namespace LINQQueries
 
         static void SerializeToXml(List<Car> cars, string fileName)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Car>));
-            using (TextWriter writer = new StreamWriter(fileName))
+            // Konfiguracja serializera
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Car>), new XmlRootAttribute("cars"));
+            XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+            namespaces.Add("", ""); // Usunięcie domyślnego namespace'u
+
+            // Serializacja
+            using (Stream stream = new FileStream(fileName, FileMode.Create))
             {
-                serializer.Serialize(writer, cars);
+                serializer.Serialize(stream, cars, namespaces);
             }
+
+            XDocument xmlDocument = XDocument.Load(fileName);
+
+            // Zmiana nazwy elementu horsePower na hp
+            foreach (var element in xmlDocument.Descendants("Car").ToList())
+            {
+                element.Name = "car";
+
+                var engineElement = element.Element("engine");
+                var modelElement = element.Element("model");
+
+                if (engineElement != null && modelElement != null)
+                {
+                    engineElement.SetAttributeValue("model", modelElement.Value);
+                    modelElement.Remove();
+                }
+            }
+
+
+            xmlDocument.Save(fileName);
+
             Console.WriteLine("Serializacja do XML zakończona pomyślnie.");
         }
 
+
         static List<Car> DeserializeFromXml(string fileName)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Car>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Car>), new XmlRootAttribute("cars"));
             using (TextReader reader = new StreamReader(fileName))
             {
                 return (List<Car>)serializer.Deserialize(reader);
