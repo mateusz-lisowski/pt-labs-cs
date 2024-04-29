@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-cs-labs\\lab1\\pt-cs-labs.csproj": {}
+    "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-labs-cs\\lab1\\pt-cs-labs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-cs-labs\\lab1\\pt-cs-labs.csproj": {
+    "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-labs-cs\\lab1\\pt-cs-labs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-cs-labs\\lab1\\pt-cs-labs.csproj",
+        "projectUniqueName": "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-labs-cs\\lab1\\pt-cs-labs.csproj",
         "projectName": "pt-cs-labs",
-        "projectPath": "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-cs-labs\\lab1\\pt-cs-labs.csproj",
+        "projectPath": "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-labs-cs\\lab1\\pt-cs-labs.csproj",
         "packagesPath": "C:\\Users\\sindbad_the_sailor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-cs-labs\\lab1\\obj\\",
+        "outputPath": "C:\\Users\\sindbad_the_sailor\\VSCProjects\\pt-labs-cs\\lab1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sindbad_the_sailor\\AppData\\Roaming\\NuGet\\NuGet.Config",
