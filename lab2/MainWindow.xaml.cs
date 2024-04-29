@@ -87,10 +87,22 @@ namespace wpf_full
             {
                 if (File.Exists(path))
                 {
+                    FileAttributes attributes = File.GetAttributes(path);
+                    if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                    {
+                        File.SetAttributes(path, attributes & ~FileAttributes.ReadOnly); // Remove ReadOnly attribute
+                    }
                     File.Delete(path);
                 }
                 else if (Directory.Exists(path))
                 {
+                    RemoveReadOnlyFilesRecursively(path); // Usuwa pliki z atrybutem 'ReadOnly'
+                                                          // Usuwanie atrybutu ReadOnly dla folderu
+                    FileAttributes attributes = File.GetAttributes(path);
+                    if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                    {
+                        File.SetAttributes(path, attributes & ~FileAttributes.ReadOnly); // Remove ReadOnly attribute
+                    }
                     Directory.Delete(path, true);
                 }
 
@@ -102,6 +114,25 @@ namespace wpf_full
                 MessageBox.Show($"Wystąpił błąd podczas usuwania: {ex.Message}");
             }
         }
+
+        private void RemoveReadOnlyFilesRecursively(string directoryPath)
+        {
+            foreach (string filePath in Directory.GetFiles(directoryPath))
+            {
+                FileAttributes attributes = File.GetAttributes(filePath);
+                if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                {
+                    File.SetAttributes(filePath, attributes & ~FileAttributes.ReadOnly); // Remove ReadOnly attribute
+                    File.Delete(filePath);
+                }
+            }
+
+            foreach (string subdirectoryPath in Directory.GetDirectories(directoryPath))
+            {
+                RemoveReadOnlyFilesRecursively(subdirectoryPath);
+            }
+        }
+
 
         private void CreateMenuItem_Click(object sender, RoutedEventArgs e)
         {
