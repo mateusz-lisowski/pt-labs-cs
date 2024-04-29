@@ -1,0 +1,43 @@
+﻿<Window x:Class="wpf_full.CreateElementDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:wpf_full"
+        mc:Ignorable="d"
+        Title="CreateElementDialog" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Content="Name:"/>
+        <TextBox Grid.Row="1" x:Name="NameTextBox"/>
+
+        <Label Grid.Row="2" Content="Type:"/>
+        <ComboBox Grid.Row="3" x:Name="FileTypeComboBox">
+            <ComboBoxItem Content="File"/>
+            <ComboBoxItem Content="Folder"/>
+        </ComboBox>
+
+        <Label Grid.Row="4" Content="Attributes:"/>
+
+        <CheckBox Grid.Row="5" Content="ReadOnly" x:Name="ReadOnlyCheckBox"/>
+        <CheckBox Grid.Row="6" Content="Archive" x:Name="ArchiveCheckBox"/>
+        <CheckBox Grid.Row="7" Content="Hidden" x:Name="HiddenCheckBox"/>
+        <CheckBox Grid.Row="8" Content="System" x:Name="SystemCheckBox"/>
+
+        <StackPanel Grid.Row="9" Orientation="Horizontal">
+            <Button Content="Create" Click="CreateButton_Click"/>
+            <Button Content="Cancel" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
