@@ -1,194 +1,148 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace MultiTaskingExample
-{
-    class Program
-    {
-        [STAThread]
-        static void Main()
+﻿// Klasa Engine z implementacją IComparable
+        public class Engine : IComparable<Engine>
         {
-            // Zadanie 1: Obliczanie Symbolu Newtona
-            int N = 5;
-            int K = 3;
-            var taskResult = CalculateBinomialCoefficientUsingTasks(N, K).Result;
-            Console.WriteLine($"(Task) Symbol Newtona dla N={N} i K={K} wynosi {taskResult}");
+            public double Displacement { get; set; }
+            public double HorsePower { get; set; }
+            public string Model { get; set; }
 
-            var delegateResult = CalculateBinomialCoefficientUsingTasksWithDelegates(N, K).Result;
-            Console.WriteLine($"(Delegate) Symbol Newtona dla N={N} i K={K} wynosi {delegateResult}");
+            public Engine() { }
 
-            var asyncAwaitResult = CalculateBinomialCoefficientAsync(N, K).Result;
-            Console.WriteLine($"(Async/Await) Symbol Newtona dla N={N} i K={K} wynosi {asyncAwaitResult}");
-
-            // Zadanie 2: Obliczanie i-ego wyrazu ciągu Fibonacciego
-            Application.Run(new FibonacciCalculator());
-
-            // Zadanie 3: Kompresja plików
-            Application.Run(new FileCompressor());
-        }
-
-        // Implementacje z zadania 1
-
-        // Implementacja przy użyciu klas Task i Task<T>
-        static async Task<int> CalculateBinomialCoefficientUsingTasks(int N, int K)
-        {
-            Task<int> numeratorTask = Task.Run(() => Factorial(N));
-            Task<int> denominatorTask = Task.Run(() => Factorial(K) * Factorial(N - K));
-
-            int numerator = await numeratorTask;
-            int denominator = await denominatorTask;
-
-            return numerator / denominator;
-        }
-
-        // Implementacja przy użyciu Task zamiast BeginInvoke/EndInvoke do wywołania metod asynchronicznych
-        static async Task<int> CalculateBinomialCoefficientUsingTasksWithDelegates(int N, int K)
-        {
-            var numeratorTask = Task.Run(() => Factorial(N));
-            var denominatorTask1 = Task.Run(() => Factorial(K));
-            var denominatorTask2 = Task.Run(() => Factorial(N - K));
-
-            int numerator = await numeratorTask;
-            int denominator = await denominatorTask1 * await denominatorTask2;
-
-            return numerator / denominator;
-        }
-
-        // Implementacja przy użyciu metody asynchronicznej async-await
-        static async Task<int> CalculateBinomialCoefficientAsync(int N, int K)
-        {
-            Task<int> numeratorTask = Task.Run(() => Factorial(N));
-            Task<int> denominatorTask = Task.Run(() => Factorial(K) * Factorial(N - K));
-
-            int numerator = await numeratorTask;
-            int denominator = await denominatorTask;
-
-            return numerator / denominator;
-        }
-
-        static int Factorial(int n)
-        {
-            int result = 1;
-            for (int i = 2; i <= n; i++)
-                result *= i;
-            return result;
-        }
-    }
-
-    // Implementacja zadania 2 przy użyciu klasy BackgroundWorker
-    public class FibonacciCalculator : Form
-    {
-        private BackgroundWorker worker = new BackgroundWorker();
-        private ProgressBar progressBar = new ProgressBar();
-        private Label resultLabel = new Label();
-
-        public FibonacciCalculator()
-        {
-            worker.WorkerReportsProgress = true;
-            worker.DoWork += Worker_DoWork;
-            worker.ProgressChanged += Worker_ProgressChanged;
-            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-
-            progressBar.Dock = DockStyle.Top;
-            resultLabel.Dock = DockStyle.Top;
-
-            Controls.Add(resultLabel);
-            Controls.Add(progressBar);
-
-            worker.RunWorkerAsync(10); // Liczba wyrazów ciągu Fibonacciego do obliczenia
-        }
-
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int n = (int)e.Argument;
-            int result = Fibonacci(n, (BackgroundWorker)sender, e);
-            e.Result = result;
-        }
-
-        private int Fibonacci(int n, BackgroundWorker worker, DoWorkEventArgs e)
-        {
-            int a = 0;
-            int b = 1;
-            for (int i = 0; i <= n; i++)
+            public Engine(double displacement, double horsePower, string model)
             {
-                if (worker.CancellationPending)
+                Displacement = displacement;
+                HorsePower = horsePower;
+                Model = model;
+            }
+
+            public int CompareTo(Engine other)
+            {
+                return HorsePower.CompareTo(other.HorsePower);
+            }
+        }
+
+        // Klasa Car
+        public class Car
+        {
+            public string Model { get; set; }
+            public int Year { get; set; }
+            public Engine CarEngine { get; set; }
+
+            public Car() { }
+
+            public Car(string model, Engine engine, int year)
+            {
+                Model = model;
+                CarEngine = engine;
+                Year = year;
+            }
+        }
+
+public class SortableBindingList<T> : BindingList<T>
+        {
+            private bool isSorted;
+            private ListSortDirection sortDirection;
+            private PropertyDescriptor sortProperty;
+
+            // Dodaj konstruktor przyjmujący listę obiektów
+            public SortableBindingList(IEnumerable<T> collection) : base(collection.ToList())
+            {
+            }
+
+            protected override bool SupportsSortingCore => true;
+
+            protected override ListSortDirection SortDirectionCore => sortDirection;
+
+            protected override PropertyDescriptor SortPropertyCore => sortProperty;
+
+            protected override bool IsSortedCore => isSorted;
+
+            protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
+            {
+                if (typeof(IComparable).IsAssignableFrom(prop.PropertyType))
                 {
-                    e.Cancel = true;
-                    return 0;
+                    List<T> items = this.Items as List<T>;
+                    if (items != null)
+                    {
+                        items.Sort((x, y) =>
+                        {
+                            IComparable xValue = (IComparable)prop.GetValue(x);
+                            IComparable yValue = (IComparable)prop.GetValue(y);
+
+                            return direction == ListSortDirection.Ascending ? xValue.CompareTo(yValue) : yValue.CompareTo(xValue);
+                        });
+
+                        isSorted = true;
+                        sortProperty = prop;
+                        sortDirection = direction;
+                    }
+                }
+                else
+                {
+                    isSorted = false;
                 }
 
-                int temp = a;
-                a = b;
-                b = temp + b;
-                Thread.Sleep(5); // Spowolnienie pętli
-                worker.ReportProgress((i * 100) / n);
+                this.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
             }
-            return a;
-        }
 
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            progressBar.Value = e.ProgressPercentage;
-        }
-
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled)
+            protected override void RemoveSortCore()
             {
-                resultLabel.Text = "Obliczenia zostały przerwane.";
+                isSorted = false;
             }
-            else if (e.Error != null)
+
+            protected override bool SupportsSearchingCore => true;
+
+            protected override int FindCore(PropertyDescriptor prop, object key)
             {
-                resultLabel.Text = "Wystąpił błąd: " + e.Error.Message;
-            }
-            else
-            {
-                resultLabel.Text = "Wynik: " + e.Result.ToString();
-            }
-        }
-    }
-
-    // Implementacja zadania 3 przy użyciu GZipStream
-    public class FileCompressor : Form
-    {
-        private Button compressButton = new Button { Text = "Kompresuj" };
-        private FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-
-        public FileCompressor()
-        {
-            compressButton.Dock = DockStyle.Top;
-            compressButton.Click += CompressButton_Click;
-
-            Controls.Add(compressButton);
-        }
-
-        private async void CompressButton_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedPath = folderBrowserDialog.SelectedPath;
-                string[] files = Directory.GetFiles(selectedPath);
-
-                await Task.WhenAll(files.Select(file => Task.Run(() => CompressFile(file))));
+                for (int i = 0; i < this.Count; i++)
+                {
+                    if (prop.GetValue(this[i]).Equals(key))
+                        return i;
+                }
+                return -1;
             }
         }
 
-        private void CompressFile(string file)
-        {
-            string compressedFile = file + ".gz";
+        SortableBindingList<Car> myCarsBindingList;
 
-            using (FileStream originalFileStream = new FileStream(file, FileMode.Open, FileAccess.Read))
-            using (FileStream compressedFileStream = new FileStream(compressedFile, FileMode.Create))
-            using (GZipStream compressionStream = new GZipStream(compressedFileStream, CompressionMode.Compress))
+var myCars = new List<Car>
             {
-                originalFileStream.CopyTo(compressionStream);
-            }
-        }
-    }
-}
+                new Car("E250", new Engine(1.8, 204, "CGI"), 2009),
+                new Car("E350", new Engine(3.5, 292, "CGI"), 2009),
+                new Car("A6", new Engine(2.5, 187, "FSI"), 2012),
+                new Car("A6", new Engine(2.8, 220, "FSI"), 2012),
+                new Car("A6", new Engine(3.0, 295, "TFSI"), 2012),
+                new Car("A6", new Engine(2.0, 175, "TDI"), 2011),
+                new Car("A6", new Engine(3.0, 309, "TDI"), 2011),
+                new Car("S6", new Engine(4.0, 414, "TFSI"), 2012),
+                new Car("S8", new Engine(4.0, 513, "TFSI"), 2012)
+                // Dodaj inne samochody do kolekcji
+            };
+
+            myCarsBindingList = new SortableBindingList<Car>(myCars);
+
+            // query 1
+            var query1 = from car in myCarsBindingList
+                         where car.Model == "A6"
+                         group car by car.CarEngine.Model == "TDI" ? "diesel" : "petrol" into carGroup
+                         select new
+                         {
+                             engineType = carGroup.Key,
+                             avgHPPL = carGroup.Average(car => car.CarEngine.HorsePower / car.CarEngine.Displacement)
+                         } into result
+                         orderby result.avgHPPL descending
+                         select result;
+
+
+            // query 2
+            var query2 = myCarsBindingList
+                        .Where(car => car.Model == "A6")
+                        .GroupBy(car => car.CarEngine.Model == "TDI" ? "diesel" : "petrol")
+                        .Select(group => new
+                        {
+                            engineType = group.Key,
+                            avgHPPL = group.Average(car => car.CarEngine.HorsePower / car.CarEngine.Displacement)
+                        })
+                        .OrderByDescending(result => result.avgHPPL);
+
+            Console.WriteLine(query1);
+            Console.WriteLine(query2);

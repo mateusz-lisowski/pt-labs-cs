@@ -7,9 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-	<PropertyGroup>
-		<TargetFramework>net6.0-windows</TargetFramework>
-		<UseWindowsForms>true</UseWindowsForms>
-	</PropertyGroup>
-
 </Project>
