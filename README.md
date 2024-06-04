@@ -8,3 +8,5 @@ Main repo for C# part of labs from PT subject at GUT in 2024.
 - WPF app for operating on directories
 - XML serialization and deserialization with LINQ queries
 - WPF app for operating on collections
+- Different multitasking strategies
+- TCP client - server communication
