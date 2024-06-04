@@ -39,10 +39,11 @@ class Server
             {
                 // Odbierz obiekt
                 var dataObject = (DataObject)formatter.Deserialize(stream);
-                Console.WriteLine($"Received: {dataObject.Number}");
+                Console.WriteLine($"Received from {dataObject.ClientName} at {dataObject.Timestamp}: {dataObject.Number}");
 
                 // Modyfikuj obiekt
                 dataObject.Number += 1;
+                dataObject.Timestamp = DateTime.Now;
                 Console.WriteLine($"Modified: {dataObject.Number}");
 
                 // Wyślij zmodyfikowany obiekt z powrotem do klienta
